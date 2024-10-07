@@ -351,9 +351,9 @@ end)
 RegisterNetEvent('seatbelt:client:ToggleSeatbelt', function() -- Triggered in smallresources
     vehicleStats.beltOn = not vehicleStats.beltOn
     if vehicleStats.beltOn then
-        lib.notify({title = 'Seatbelt On', type = 'success'})
+        QBCore.Functions.Notify("Seatbelt On", "success")
     else
-        lib.notify({title = 'Seatbelt Off', type = 'error'})
+        QBCore.Functions.Notify("Seatbelt Off", "error")
     end
     updateVehicleStats()
 end)
@@ -361,4 +361,22 @@ end)
 RegisterNetEvent('hud:client:ToggleShowSeatbelt', function()
     vehicleStats.beltOn = not vehicleStats.beltOn
     updateVehicleStats()
+end)
+
+-- Commands
+
+-- /cash command
+RegisterCommand('cash', function()
+    local player = PlayerPedId()
+    local playerData = QBCore.Functions.GetPlayerData()
+    local cash = playerData.money['cash'] or 0
+    QBCore.Functions.Notify("You have $"..cash.." in cash.", "success")
+end)
+
+-- /bank command
+RegisterCommand('bank', function()
+    local player = PlayerPedId()
+    local playerData = QBCore.Functions.GetPlayerData()
+    local bank = playerData.money['bank'] or 0
+    QBCore.Functions.Notify("You have $"..bank.." in your bank account.", "success")
 end)
